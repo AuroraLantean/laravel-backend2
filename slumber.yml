@@ -1,0 +1,44 @@
+# For basic usage info, see:
+# https://slumber.lucaspickering.me/book/getting_started.html
+# For all collection options, see:
+# https://slumber.lucaspickering.me/book/api/request_collection/index.html
+# https://slumber.lucaspickering.me/book/api/request_collection/chain.html
+
+# Profiles are groups of data you can easily switch between. A common usage is
+# to define profiles for various environments of a REST service
+profiles:
+  local:
+    name: Local
+    data:
+      host: http://localhost:8000
+
+chains:
+#Capture X-CSRF-TOKEN header value: 
+#Capture csrf_token from `{"csrf_token": "foo"}`
+  csrftoken:
+    source: !request
+      recipe: get_csrf_token
+    selector: $.csrf_token
+    #=> How to copy all received headers?
+    #section: !header set-cookie # This will take the value of the 'Token' header
+#https://slumber.lucaspickering.me/book/api/request_collection/chain.html
+
+requests:
+  get_csrf_token: !request
+    method: GET
+    url: "{{host}}/csrf_token"
+    #headers: !header Token # This will take the value of the 'Token' header
+
+  send_txn: !request
+    #section: !header set-cookie # This will take the value of the 'Token' header
+    headers:
+      X-CSRF-TOKEN: "{{chains.csrftoken}}"
+      #set-cookie: "{{chains.set-cookie}}"
+      #content-type: application/json
+    method: POST
+    url: "{{host}}/send_txn"
+    body: !json { "id": 3, "target": "0x112", "amount": "1000" }
+
+  hello: !request
+    method: GET
+    url: "{{host}}/hello"

@@ -27,5 +27,5 @@ examples
 zz*.sh
 cicd*
 wallets
-slumber.yml
+#slumber.yml
 bruno_collection
