@@ -28,7 +28,9 @@ slumber
 Test `hello`
 
 Test `get_scrf_token`
+
 Should expect something like:
+
 returned Body
 ```
 {
@@ -45,15 +47,18 @@ contect-type	application/json
 set-cookie	XSRF-TOKEN=...
 set-cookie	laravel_session=...
 ```
-
+---
 Test `send_txn`
+
 Outgoing Header:
 ```
 contect-type	application/json
 x-csrf-token	abc123...
 ```
 Should expect something like:
+
 `419 <unknown status code>`
+
 returned Body
 ```
 ... Page Expired ...
@@ -68,6 +73,3 @@ date	02 Jan 2025 ...
 contect-type	text/html; charset=UTF-8
 set-cookie	laravel_session=...
 ```
-
-
-
