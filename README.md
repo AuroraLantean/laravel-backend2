@@ -37,16 +37,21 @@ returned Body
 ```
 returned Headers:
 ```
-host						localhost:8000
-x-powered-by		PHP/8.4.1
-cache-control		no-cache, private
-date						02 Jan 2025 ...
-contect-type		application/json
-set-cookie			XSRF-TOKEN=...
-set-cookie			laravel_session=...
+host	localhost:8000
+x-powered-by	PHP/8.4.1
+cache-control	no-cache, private
+date	02 Jan 2025 ...
+contect-type	application/json
+set-cookie	XSRF-TOKEN=...
+set-cookie	laravel_session=...
 ```
 
 Test `send_txn`
+Outgoing Header:
+```
+contect-type	application/json
+x-csrf-token	abc123...
+```
 Should expect something like:
 `419 <unknown status code>`
 returned Body
@@ -55,13 +60,13 @@ returned Body
 ```
 returned Headers
 ```
-host						localhost:8000
-connection			close
-x-powered-by		PHP/8.4.1
-cache-control		no-cache, private
-date						02 Jan 2025 ...
-contect-type		text/html; charset=UTF-8
-set-cookie			laravel_session=...
+host	localhost:8000
+connection	close
+x-powered-by	PHP/8.4.1
+cache-control	no-cache, private
+date	02 Jan 2025 ...
+contect-type	text/html; charset=UTF-8
+set-cookie	laravel_session=...
 ```
 
 
