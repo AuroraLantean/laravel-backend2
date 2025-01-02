@@ -1,0 +1,19 @@
+meta {
+  name: send_txn
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}/send_txn
+  body: json
+  auth: none
+}
+
+headers {
+  X-CSRF-TOKEN: {{csrf_token}}
+}
+
+body:json {
+  { "id": 3, "target": "0x112", "amount": "1001" }
+}
